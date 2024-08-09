@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/output.css" />
+    <title>Rock Paper Scissors</title>
+    <script defer src="./script/theme.js"></script>
+    <script defer type="module" src="./script/app.js"></script>
+  </head>
+  <body class="bg-light dark:bg-dark text-blue-dark dark:text-white">
+    <header class="flex p-2 md:py-3 md:px-5">
+      <div class="flex flex-col justify-center ml-auto">
+        <input id="checkbox" class="hidden" type="checkbox" />
+        <label id="checkbox-icon" for="checkbox">
+          <img
+            class="dark:hidden w-[50px]"
+            src="./assets/dark-icon.svg"
+            alt="dark icon"
+          />
+          <img
+            class="hidden dark:block w-[50px]"
+            src="./assets/light-icon.svg"
+            alt="light icon"
+          />
+        </label>
+      </div>
+    </header>
+
+    <section class="flex flex-col items-center gap-10 pt-6 px-2 md:px-5">
+      <div class="w-full flex items-center justify-around dark:text-white">
+        <p class="text-xl">Player: <span id="player-score">0</span></p>
+        <p class="text-xl">Computer: <span id="computer-score">0</span></p>
+      </div>
+
+      <!-- Timer -->
+
+      <div
+        id="timer-wrapper"
+        class="bg-red-light dark:bg-blue-dark block text-center w-2/3 md:w-1/3 rounded-xl py-2 text-white text-xl"
+      >
+        <p>Time remaining: <span id="timer">15</span></p>
+      </div>
+
+      <!-- result heading -->
+
+      <div id="result-wrapper" class="w-2/3 text-center hidden">
+        <h2 id="result" class="text-4xl md:6xl text-black dark:text-white">
+          You Won!🎉
+        </h2>
+      </div>
+
+      <!-- Chosen Items -->
+
+      <div id="chosen-item-wrapper" class="flex flex-col gap-4">
+        <div
+          id="chosen-item-player-wrapper"
+          class="hidden gap-3 items-center justify-between md:gap-10"
+        >
+          <p>Player:</p>
+          <div id="chosen-item-player"></div>
+        </div>
+        <div
+          id="chosen-item-computer-wrapper"
+          class="hidden gap-3 items-center justify-between md:gap-10"
+        >
+          <p>Computer:</p>
+          <div id="chosen-item-computer"></div>
+        </div>
+      </div>
+
+      <!-- Choices -->
+
+      <div class="flex items-center gap-3 w-2/3 text-3xl">
+        <button class="choice" id="rock">🪨</button>
+        <button class="choice" id="paper">📃</button>
+        <button class="choice" id="scissors">✂️</button>
+      </div>
+    </section>
+  </body>
+</html>
