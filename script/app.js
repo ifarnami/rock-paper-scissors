@@ -26,7 +26,7 @@ const choices = ["🪨", "📃", "✂️"];
 const initialState = {
   userScore: 0,
   computerScore: 0,
-  time: 5,
+  time: 15,
   playersChoice: null,
   computerChoice: null,
 };
