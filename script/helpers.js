@@ -24,3 +24,18 @@ export const compareChoices = (player, computer) => {
     return resultState.lose;
   }
 };
+
+export const showFinalResult = (
+  playerFinalScore,
+  computerFinalScore,
+  resultElement
+) => {
+  resultElement.className += " animate-bounce";
+  if (playerFinalScore === computerFinalScore) {
+    resultElement.textContent = "Final Result: Draw🟰";
+  } else if (playerFinalScore > computerFinalScore) {
+    resultElement.textContent = "Final Result: You Won!🎉";
+  } else {
+    resultElement.textContent = "Final Result: You Lost!🏳️";
+  }
+};

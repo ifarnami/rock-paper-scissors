@@ -3,7 +3,11 @@ import {
   rockElement,
   scissorsElement,
 } from "./elementCreator.js";
-import { generateComputerChoice, compareChoices } from "./helpers.js";
+import {
+  generateComputerChoice,
+  compareChoices,
+  showFinalResult,
+} from "./helpers.js";
 
 const playerScore = document.querySelector("#player-score");
 const computerScore = document.querySelector("#computer-score");
@@ -19,6 +23,7 @@ const chosenItemComputerWrapper = document.querySelector(
 );
 const chosenItemComputer = document.querySelector("#chosen-item-computer");
 const items = document.querySelectorAll(".choice");
+const resetBtn = document.querySelector("#reset");
 let intervalId;
 
 const choices = ["🪨", "📃", "✂️"];
@@ -29,13 +34,14 @@ const initialState = {
   time: 15,
   playersChoice: null,
   computerChoice: null,
+  isFinished: false,
 };
 
 window.addEventListener("DOMContentLoaded", () => {
-  countDown(initialState.time, timer);
+  countDown(initialState.time, timer, initialState.isFinished);
 });
 
-const countDown = (time, element) => {
+const countDown = (time, element, flag) => {
   intervalId = setInterval(() => {
     time--;
     element.textContent = time;
@@ -43,9 +49,15 @@ const countDown = (time, element) => {
     if (time === 0) {
       clearInterval(intervalId);
       element.textContent = "0 - You ran out of time!";
+      flag = true;
       items.forEach((item) => {
         item.disabled = true;
       });
+      showFinalResult(
+        parseInt(playerScore.textContent),
+        parseInt(computerScore.textContent),
+        result
+      );
     }
   }, 1000);
 };
@@ -58,9 +70,6 @@ items.forEach((item) => {
     playersChoice = textContent;
 
     computerChoice = generateComputerChoice(choices);
-
-    console.log("Computer:", computerChoice);
-    console.log("Player:", playersChoice);
 
     switch (computerChoice) {
       case "🪨":
@@ -110,3 +119,32 @@ items.forEach((item) => {
     resultWrapper.classList.remove("hidden");
   });
 });
+
+resetBtn.addEventListener("click", () => {
+  restart();
+});
+
+const restart = () => {
+  initialState.computerChoice = null;
+  initialState.playersChoice = null;
+  initialState.computerScore = 0;
+  initialState.userScore = 0;
+  initialState.isFinished = false;
+  initialState.time = 15;
+
+  computerScore.textContent = 0;
+  playerScore.textContent = 0;
+
+  resultWrapper.classList.add("hidden");
+  result.classList.remove("animate-bounce");
+  chosenItemComputerWrapper.classList.add("hidden");
+  chosenItemPlayerWrapper.classList.add("hidden");
+  chosenItemComputer.innerHTML = null;
+  chosenItemPlayer.innerHTML = null;
+
+  items.forEach((item) => {
+    item.disabled = false;
+  });
+
+  countDown(initialState.time, timer, initialState.flag);
+};
