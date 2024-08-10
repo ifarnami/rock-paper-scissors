@@ -146,5 +146,7 @@ const restart = () => {
     item.disabled = false;
   });
 
+  clearInterval(intervalId);
+
   countDown(initialState.time, timer, initialState.flag);
 };
